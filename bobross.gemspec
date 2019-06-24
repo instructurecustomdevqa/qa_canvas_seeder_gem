@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jacob Slack"]
   spec.email         = ["jacobs@instructure.com"]
 
-  spec.summary       = %q{Generates data too put in your canvas instance.}
-  spec.description   = %q{Generates data too put in your canvas instance. Data can be exported as CSV for uploading or sent directly via api call}
+  spec.summary       = %q{Generates data to put in your canvas instance.}
+  spec.description   = %q{Generates data to put in your canvas instance. Data can be exported as CSV for uploading or sent directly via api call}
   spec.homepage      = "http://www.instructure.com"
   spec.license       = "MIT"
 
