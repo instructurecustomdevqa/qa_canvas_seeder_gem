@@ -1,6 +1,17 @@
 require "bobross/version"
+require "models/account"
+require "models/assignment_grade"
+require "models/assignment_group"
+require "models/assignment_submission"
+require "models/assignment"
+require "models/course"
+require "models/group_in_account"
+require "models/group_in_course"
+require "models/section"
+require "models/user"
+require "forgeries/course_forgery"
+require "forgery"
 
 module Bobross
   class Error < StandardError; end
-  # Your code goes here...
 end
