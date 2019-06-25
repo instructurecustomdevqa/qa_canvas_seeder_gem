@@ -1,11 +1,11 @@
 class Section
-  @name = ""
-  @sis_id = ""
-end
 
-FactoryBot.define do
-  factory :section do
-    name {"#{Forgery('name').title}. #{Forgery('name').company_name}"}
-    uid { Forgery('internet').ip_v4 }
+  def to_s
+    s = "#{@nane}, #{@sis_id}"
+  end
+
+  def self.random
+    @name = "#{Forgery('name').title}"
+    @sis_id = Forgery('internet').ip_v4
   end
 end
