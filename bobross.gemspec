@@ -39,6 +39,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "forgery", "~> 0.7.0"
   spec.add_development_dependency "bearcat", "~> 1.3.30"
 end
