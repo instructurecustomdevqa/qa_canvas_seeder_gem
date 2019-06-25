@@ -1,8 +1,5 @@
 class Account < Forgery
-
-  @local_dictionaries = File.absolute_path("lib")
-  @row
-
+  attr_reader :name, :uid, :sis_id, :description
   def to_s
     string = ""
   end
