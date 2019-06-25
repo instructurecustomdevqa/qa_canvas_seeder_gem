@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jacob Slack"]
   spec.email         = ["jacobs@instructure.com"]
 
-  spec.summary       = %q{Generates data too put in your canvas instance.}
-  spec.description   = %q{Generates data too put in your canvas instance. Data can be exported as CSV for uploading or sent directly via api call}
+  spec.summary       = %q{Generates data to put in your canvas instance.}
+  spec.description   = %q{Generates data to put in your canvas instance. Data can be exported as CSV for uploading or sent directly via api call}
   spec.homepage      = "http://www.instructure.com"
   spec.license       = "MIT"
 
@@ -39,7 +39,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "factory_bot", "~> 4.11.1"
-  spec.add_development_dependency "forgery", "~> 0.7.0"
   spec.add_development_dependency "bearcat", "~> 1.3.30"
 end
