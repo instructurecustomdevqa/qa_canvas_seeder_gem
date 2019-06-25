@@ -1,35 +1,32 @@
 class Course < Forgery
   @local_dictionaries = File.absolute_path("lib")
   @row
-  @name = ""
-  @uid = Time.new.to_i.to_s
-  @sis_id = ""
-  @description = ""
+
+  def to_s
+    s = "#{@name}, #{@uid}, #{@sis_id}, #{@description}"
+  end
 
   def self.random
-    name { course_name }
-    uid { course_code }
-    sis_id { "#{uid.strip.gsub(/\s+/, "")}_#{rand(10000)}" }
-    run_id { $runtime.to_i.to_s }
-    environment_id {$test_env.id}
-    description {description}
+    @name = Course.course_name
+    @uid = Course.course_code
+    @sis_id = "#{@uid.strip.gsub(/\s+/, "")}_#{rand(10000)}"
+    @description = Course.description
+    puts "Done"
   end
-end
 
-private
+  def self.course_code
+    Forgery.load_from!(@local_dictionaries)
+    dictionaries[:course_codes][@row]
+  end
 
-def course_code
-  Forgery.load_from!(@local_dictionaries)
-  dictionaries[:course_codes][@row]
-end
+  def self.course_name
+    Forgery.load_from!(@local_dictionaries)
+    name_count = Forgery.dictionaries[:course_names].count
+    @row = rand(name_count)
+    dictionaries[:course_names][@row]
+  end
 
-def course_name
-  Forgery.load_from!(@local_dictionaries)
-  name_count = Forgery.dictionaries[:course_names].count
-  @row = rand(name_count)
-  dictionaries[:course_names][@row]
-end
-
-def description
-  Forgery(:lorem_ipsum).words(10)
+  def self.description
+    Forgery(:lorem_ipsum).words(10)
+  end
 end

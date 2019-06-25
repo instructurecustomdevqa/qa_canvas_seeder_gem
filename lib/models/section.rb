@@ -1,4 +1,4 @@
-class Section
+class Section < Forgery
 
   def to_s
     s = "#{@nane}, #{@sis_id}"

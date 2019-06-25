@@ -1,4 +1,5 @@
 require "bobross/version"
+require "forgery"
 require "models/account"
 require "models/assignment_grade"
 require "models/assignment_group"
