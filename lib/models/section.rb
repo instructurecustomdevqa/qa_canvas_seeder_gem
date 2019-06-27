@@ -1,4 +1,6 @@
 class Section < Forgery
+  attr_reader :name, :sis_id, :course_id, :course_sis_id, :start_at, :end_at
+  attr_writer :course, :course_sis_id
 
   def initialize(name, sis_id, course, start_at, end_at)
     @name = name
