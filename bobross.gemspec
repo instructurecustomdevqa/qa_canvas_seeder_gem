@@ -6,18 +6,18 @@ require "bobross/version"
 Gem::Specification.new do |spec|
   spec.name          = "bobross"
   spec.version       = Bobross::VERSION
-  spec.authors       = ["Jacob Slack"]
-  spec.email         = ["jacobs@instructure.com"]
+  spec.authors       = ["Jacob Slack", "Trevor Byington"]
+  spec.email         = ["jacobs@instructure.com", "tbyington@instructure.com", "tabyington@gmail.com"]
 
   spec.summary       = %q{Generates data to put in your canvas instance.}
   spec.description   = %q{Generates data to put in your canvas instance. Data can be exported as CSV for uploading or sent directly via api call}
-  spec.homepage      = "http://www.instructure.com"
+  spec.homepage      = "https://rubygems.org/gems/bobross"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
   if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+    spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
     spec.metadata["homepage_uri"] = spec.homepage
     spec.metadata["source_code_uri"] = "https://github.com/instructurecustomdevqa/bobross"

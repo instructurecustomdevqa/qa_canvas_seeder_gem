@@ -5,25 +5,28 @@ class Account < Forgery
     string = "#{@name}, #{@uid}, #{@parent_id}, #{@root_id}, #{@time_zone}, #{@sis_id}, #{@workflow}"
   end
 
-  def initialize(name, uid, parent, root, time_zone, sis, workflow)
-    @name = name
-    @uid = uid
-    @parent_id = parent
-    @root_id = root
-    @time_zone = time_zone
-    @sis_id = sis
-    @workflow = workflow
+  def initialize(opts = {})
+    @name = opts[:name] if opts[:name]
+    @uid = opts[:uid] if opts[:uid]
+    @parent_id = opts[:parent] if opts[:parent]
+    @root_id = opts[:root] if opts[:root]
+    @time_zone = opts[:time_zone] if opts[:time_zone]
+    @sis_id = opts[:sis] if opts[:sis]
+    @workflow = opts[:workflow] if opts[:workflow]
   end
 
   def self.random (parent_id = 1 , root_id = 1)
     a = Forgery('name').company_name
     Account.new(
-      a,
-      "#{a}-#{rand(10000)}",
-      parent_id,
-      root_id,
-      Forgery('time').zone,
-      (10000+rand(10000000)),
-      'active')
+      {
+        name: a,
+        uid: "#{a}-#{rand(10000)}",
+        parent: parent_id,
+        root: root_id,
+        time_zone: Forgery('time').zone,
+        sis_id: (10000+rand(10000000)),
+        workflow: 'active'
+        }
+      )
   end
 end

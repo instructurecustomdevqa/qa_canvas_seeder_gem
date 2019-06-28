@@ -1,12 +1,12 @@
 class Course < Forgery
   attr_reader :name, :uid, :sis_id, :description
   @@local_dictionaries = File.absolute_path("lib")
-  
-  def initialize(name, uid, sis, desc)
-    @name = name
-    @uid = uid
-    @sis_id = sis
-    @description = desc
+
+  def initialize(opts = {})
+    @name = opts[:name] if opts[:name]
+    @uid = opts[:uid] if opts[:uid]
+    @sis_id = "#{opts[:sis]}" if opts[:sis]
+    @description = opts[:desc] if opts[:desc]
   end
 
   def to_s
@@ -19,10 +19,12 @@ class Course < Forgery
 
   def self.random
     Course.new(
-      Course.course_name,
-      Course.course_code,
-      (12000+rand(1000000)).to_s,
-      Course.description
+      {
+        name: Course.course_name,
+        uid: Course.course_code,
+        sis: (12000+rand(1000000)).to_s,
+        desc: Course.description
+      }
     )
   end
 

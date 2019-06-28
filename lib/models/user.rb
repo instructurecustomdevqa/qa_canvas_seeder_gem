@@ -1,12 +1,12 @@
 class User < Forgery
   attr_reader :name, :sis_id, :login_id, :email, :time_zone
 
-  def initialize (name, sis, login, email, time_zone)
-    @name = name
-    @sis_id = sis
-    @login_id = login
-    @email = email
-    @time_zone = time_zone
+  def initialize (opts = {})
+    @name = opts[:name] if opts[:name]
+    @sis_id = opts[:sis] if opts[:sis]
+    @login_id = opts[:login] if opts[:login]
+    @email = opts[:email] if opts[:email]
+    @time_zone = opts[:time_zone] if opts[:time_zone]
   end
 
   def self.random
@@ -14,11 +14,13 @@ class User < Forgery
     ln = Forgery('name').last_name
     e = "tbyington+#{fn}.#{ln}@instructure.com"
     User.new(
-      "#{fn} #{ln}",
-      (3000+rand(1000000)),
-      e,
-      e,
-      Forgery('time').zone
+      {
+        name: "#{fn} #{ln}",
+        sis: (3000+rand(1000000)),
+        login: e,
+        email: e,
+        time_zone: Forgery('time').zone
+      }
     )
   end
 end
