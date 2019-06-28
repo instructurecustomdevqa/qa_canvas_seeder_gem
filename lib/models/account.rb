@@ -5,6 +5,7 @@ class Account < Forgery
     string = "#{@name}, #{@uid}, #{@parent_id}, #{@root_id}, #{@time_zone}, #{@sis_id}, #{@workflow}"
   end
 
+#future relase: Make fields reuired by canvas required here
   def initialize(opts = {})
     @name = opts[:name] if opts[:name]
     @uid = opts[:uid] if opts[:uid]
