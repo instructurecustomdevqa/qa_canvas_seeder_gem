@@ -1,13 +1,13 @@
 class Assignment < Forgery
-  attr_reader :name, :description, :due_at, :lock_at, :course_id, :assignment_group
-  attr_writer :due_at, :lock_at
+  attr_reader :name, :description, :course_uid, :assignment_group
+  attr_accessor :due_at, :lock_at
 
   def to_s
-    string = "#{@name}, #{@description}, #{@due_at}, #{@lock_at}, #{@course_id}, #{@assignment_group}"
+    string = "#{name}, #{description}, #{due_at}, #{lock_at}, #{course_uid}, #{assignment_group}"
   end
 
   def to_csv
-    row = [@name, @description, @due_at, @lock_at, @course_id, @assignment_group]
+    row = [name, description, due_at, lock_at, course_uid, assignment_group]
   end
 
   def initialize(opts = {})

@@ -2,11 +2,11 @@ class User < Forgery
   attr_reader :name, :sis_id, :login_id, :email, :time_zone
 
   def to_s
-    string = "#{@name}, #{@sis_id}, #{@login_id}, #{@email}, #{@time_zone}"
+    string = "#{name}, #{sis_id}, #{login_id}, #{email}, #{time_zone}"
   end
 
   def to_csv
-    row = [@name, @sis_id, @login_id, @email, @time_zone]
+    row = [name, sis_id, login_id, email, time_zone]
   end
 
   def initialize (opts = {})

@@ -1,12 +1,12 @@
 class Account < Forgery
-  attr_reader :name, :uid, :parent_id, :root_id, :time_zone, :sis_id, :workflow
+  attr_reader :name, :uid, :parent_uid, :root_uid, :time_zone, :sis_id, :workflow
 
   def to_s
-    string = "#{@name}, #{@uid}, #{@parent_id}, #{@root_id}, #{@time_zone}, #{@sis_id}, #{@workflow}"
+    string = "#{name}, #{uid}, #{parent_uid}, #{root_uid}, #{time_zone}, #{sis_id}, #{workflow}"
   end
 
   def to_csv
-    row = [@name, @uid, @parent_id, @root_id, @time_zone, @sis_id, @workflow]
+    row = [name, uid, parent_uid, root_uid, time_zone, sis_id, workflow]
   end
 #future relase: Make fields reuired by canvas required here
   def initialize(opts = {})

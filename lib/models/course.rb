@@ -10,11 +10,11 @@ class Course < Forgery
   end
 
   def to_s
-    s = "#{@name}, #{@uid}, #{@sis_id}, #{@description}"
+    s = "#{name}, #{uid}, #{sis_id}, #{description}"
   end
 
   def to_csv
-    row = [@name, @uid, @sis_id, @description]
+    row = [name, uid, sis_id, description]
   end
 
   def self.set_prefix prefix
