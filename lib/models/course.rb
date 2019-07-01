@@ -57,8 +57,8 @@ class Course < Forgery
         courses.push(Course.random)
       end
     end
-    CSV.open("./courses.csv", "wb") do |csv|
-      csv << ["name", "uid", "sis_id", "description"]
+    header = ["name", "uid", "sis_id", "description"]
+    CSV.open("./courses.csv", "wb", write_headers: true, headers: header) do |csv|
       courses.each do |acc|
         csv << acc.to_csv
       end

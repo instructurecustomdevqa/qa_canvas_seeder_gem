@@ -45,8 +45,8 @@ class Assignment < Forgery
         assignments.push(Assignment.random(course, group))
       end
     end
-    CSV.open("./assignments.csv", "wb") do |csv|
-      csv << ["name", "description", "due_at", "lock_at", "course_id", "assignment_group"]
+    header = ["name", "description", "due_at", "lock_at", "course_id", "assignment_group"]
+    CSV.open("./assignments.csv", "wb", write_headers: true, headers: header) do |csv|
       assignments.each do |acc|
         csv << acc.to_csv
       end

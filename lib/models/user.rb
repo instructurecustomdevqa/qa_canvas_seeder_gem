@@ -41,8 +41,8 @@ class User < Forgery
         users.push(User.random)
       end
     end
-    CSV.open("./users.csv", "wb") do |csv|
-      csv << ["name", "sis_id", "login_id", "email", "time_zone"]
+    header = ["name", "sis_id", "login_id", "email", "time_zone"]
+    CSV.open("./users.csv", "wb", write_headers: true, headers: header) do |csv|
       users.each do |acc|
         csv << acc.to_csv
       end

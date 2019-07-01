@@ -46,8 +46,8 @@ class Account < Forgery
         accounts.push(Account.random(parent, root))
       end
     end
-    CSV.open("./accounts.csv", "wb") do |csv|
-      csv << ["name", "uid", "parent_id", "root_id", "time_zone", "sis_id", "workflow"]
+    header = ["name", "uid", "parent_id", "root_id", "time_zone", "sis_id", "workflow"]
+    CSV.open("./accounts.csv", "wb", write_headers: true, headers: header) do |csv|
       accounts.each do |acc|
         csv << acc.to_csv
       end
