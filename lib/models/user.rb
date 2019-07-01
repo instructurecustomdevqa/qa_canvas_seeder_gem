@@ -1,6 +1,14 @@
 class User < Forgery
   attr_reader :name, :sis_id, :login_id, :email, :time_zone
 
+  def to_s
+    string = "#{name}, #{sis_id}, #{login_id}, #{email}, #{time_zone}"
+  end
+
+  def to_csv
+    row = [name, sis_id, login_id, email, time_zone]
+  end
+
   def initialize (opts = {})
     @name = opts[:name] if opts[:name]
     @sis_id = opts[:sis] if opts[:sis]
@@ -22,5 +30,22 @@ class User < Forgery
         time_zone: Forgery('time').zone
       }
     )
+  end
+
+  def self.gen_file(opts = {})
+    rows = 0
+    rows = opts[:rows] if opts[:rows]
+    users = []
+    if(opts[:rows])
+      rows.times do |x|
+        users.push(User.random)
+      end
+    end
+    header = ["name", "sis_id", "login_id", "email", "time_zone"]
+    CSV.open("./users.csv", "wb", write_headers: true, headers: header) do |csv|
+      users.each do |acc|
+        csv << acc.to_csv
+      end
+    end
   end
 end
