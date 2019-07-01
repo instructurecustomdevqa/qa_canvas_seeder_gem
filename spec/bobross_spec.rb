@@ -3,7 +3,29 @@ RSpec.describe Bobross do
     expect(Bobross::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it "creates a random account" do
+    a = Bobross::Account.random
+    expect(a.name.nil?).to eq(false)
   end
+
+  it "creates a random assignment" do
+    a = Assignment.random
+    expect(a.name.nil?).to eq(false)
+  end
+
+  it "creates  a random course" do
+    a = Course.random
+    expect(a.name.nil?).to eq(false)
+  end
+
+  it "creates a random section" do
+    a = Section.random
+    expect(a.name.nil?).to eq(false)
+  end
+
+  it "creates a random user" do
+    a = User.random
+    expect(a.name.nil?).to eq(false)
+  end
+
 end

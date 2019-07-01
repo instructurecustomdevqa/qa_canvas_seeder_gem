@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bobross (0.1.0)
+    bobross (0.1.7)
 
 GEM
   remote: https://rubygems.org/
@@ -17,15 +17,12 @@ GEM
       paul_walker (~> 0.1.1)
     concurrent-ruby (1.1.5)
     diff-lcs (1.3)
-    factory_bot (4.11.1)
-      activesupport (>= 3.0.0)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     footrest (0.5.3)
       activesupport (>= 3.0.0)
       faraday (>= 0.9.0, < 1)
       link_header (>= 0.0.7)
-    forgery (0.7.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     link_header (0.0.8)
@@ -59,8 +56,6 @@ DEPENDENCIES
   bearcat (~> 1.3.30)
   bobross!
   bundler (~> 2.0)
-  factory_bot (~> 4.11.1)
-  forgery (~> 0.7.0)
   rake (~> 10.0)
   rspec (~> 3.0)
 

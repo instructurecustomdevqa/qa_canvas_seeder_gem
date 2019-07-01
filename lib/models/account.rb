@@ -5,6 +5,9 @@ class Account < Forgery
     string = "#{@name}, #{@uid}, #{@parent_id}, #{@root_id}, #{@time_zone}, #{@sis_id}, #{@workflow}"
   end
 
+  def to_csv
+    row = [@name, @uid, @parent_id, @root_id, @time_zone, @sis_id, @workflow]
+  end
 #future relase: Make fields reuired by canvas required here
   def initialize(opts = {})
     @name = opts[:name] if opts[:name]
@@ -29,5 +32,25 @@ class Account < Forgery
         workflow: 'active'
         }
       )
+  end
+
+  def self.gen_file(opts = {})
+    parent, root = 1
+    rows = 0
+    parent = opts[:parent] if opts[:parent]
+    root = opts[:root] if opts[:root]
+    rows = opts[:rows] if opts[:rows]
+    accounts = []
+    if(opts[:rows])
+      rows.times do |x|
+        accounts.push(Account.random(parent, root))
+      end
+    end
+    CSV.open("./accounts.csv", "wb") do |csv|
+      csv << ["name", "uid", "parent_id", "root_id", "time_zone", "sis_id", "workflow"]
+      accounts.each do |acc|
+        csv << acc.to_csv
+      end
+    end
   end
 end

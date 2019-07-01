@@ -11,6 +11,7 @@ require "models/group_in_course"
 require "models/section"
 require "models/user"
 require "active_support/time"
+require "csv"
 
 module Bobross
   class Error < StandardError; end

@@ -13,6 +13,10 @@ class Course < Forgery
     s = "#{@name}, #{@uid}, #{@sis_id}, #{@description}"
   end
 
+  def to_csv
+    row = [@name, @uid, @sis_id, @description]
+  end
+
   def self.set_prefix prefix
     @@prefix = prefix
   end
@@ -42,5 +46,22 @@ class Course < Forgery
 
   def self.description
     Forgery(:lorem_ipsum).words(2+rand(30))
+  end
+
+  def self.gen_file(opts = {})
+    rows = 0
+    rows = opts[:rows] if opts[:rows]
+    courses = []
+    if(opts[:rows])
+      rows.times do |x|
+        courses.push(Course.random)
+      end
+    end
+    CSV.open("./courses.csv", "wb") do |csv|
+      csv << ["name", "uid", "sis_id", "description"]
+      courses.each do |acc|
+        csv << acc.to_csv
+      end
+    end
   end
 end
