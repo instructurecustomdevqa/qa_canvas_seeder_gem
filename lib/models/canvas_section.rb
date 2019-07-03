@@ -1,4 +1,4 @@
-class Section < Forgery
+class CanvasSection < Forgery
   attr_reader :name, :sis_id, :start_at, :end_at
   attr_accessor :course_uid, :course_sis_id
 
