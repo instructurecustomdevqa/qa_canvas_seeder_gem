@@ -1,4 +1,4 @@
-class User < Forgery
+class CanvasUser < Forgery
   attr_reader :name, :sis_id, :login_id, :email, :time_zone
 
   def to_s
@@ -21,7 +21,7 @@ class User < Forgery
     fn = Forgery('name').first_name
     ln = Forgery('name').last_name
     e = "tbyington+#{fn}.#{ln}@instructure.com"
-    User.new(
+    CanvasUser.new(
       {
         name: "#{fn} #{ln}",
         sis: (3000+rand(1000000)),
@@ -38,7 +38,7 @@ class User < Forgery
     users = []
     if(opts[:rows])
       rows.times do |x|
-        users.push(User.random)
+        users.push(CanvasUser.random)
       end
     end
     header = ["name", "sis_id", "login_id", "email", "time_zone"]

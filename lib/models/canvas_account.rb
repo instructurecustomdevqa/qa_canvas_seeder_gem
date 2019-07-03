@@ -1,4 +1,4 @@
-class Account < Forgery
+class CanvasAccount < Forgery
   attr_reader :name, :uid, :parent_uid, :root_uid, :time_zone, :sis_id, :workflow
 
   def to_s
@@ -21,7 +21,7 @@ class Account < Forgery
 
   def self.random (parent_id = 1 , root_id = 1)
     a = Forgery('name').company_name
-    Account.new(
+    CanvasAccount.new(
       {
         name: a,
         uid: "#{a}-#{rand(10000)}",
@@ -43,7 +43,7 @@ class Account < Forgery
     accounts = []
     if(opts[:rows])
       rows.times do |x|
-        accounts.push(Account.random(parent, root))
+        accounts.push(CanvasAccount.random(parent, root))
       end
     end
     header = ["name", "uid", "parent_id", "root_id", "time_zone", "sis_id", "workflow"]
