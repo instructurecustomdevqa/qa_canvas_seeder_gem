@@ -1,4 +1,4 @@
-class Assignment < Forgery
+class CanvasAssignment < Forgery
   attr_reader :name, :description, :course_uid, :assignment_group
   attr_accessor :due_at, :lock_at
 
@@ -15,19 +15,19 @@ class Assignment < Forgery
     @description = opts[:description] if opts[:description]
     @due_at = opts[:due_at] if opts[:due_at]
     @lock_at = opts[:lock_at] if opts[:lock_at]
-    @course_id = opts[:course_id] if opts[:course_id]
+    @course_uid = opts[:course_uid] if opts[:course_uid]
     @assignment_group = opts[:assignment_group] if opts[:assignment_group]
   end
 
   def self.random (course = 1, group = 1)
     d = Forgery('date').date
-    Assignment.new(
+    CanvasAssignment.new(
       {
         name: "What #{Forgery('name').job_title} #{Forgery('name').full_name} said about #{Forgery('name').industry}",
         description: "#{Forgery('lorem_ipsum').paragraphs}",
         due_at: d,
         lock_at: d+10.days,
-        course_id: course,
+        course_uid: course,
         assignment_group: group
         }
       )
@@ -42,7 +42,7 @@ class Assignment < Forgery
     assignments = []
     if(opts[:rows])
       rows.times do |x|
-        assignments.push(Assignment.random(course, group))
+        assignments.push(CanvasAssignment.random(course, group))
       end
     end
     header = ["name", "description", "due_at", "lock_at", "course_id", "assignment_group"]

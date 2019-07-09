@@ -1,4 +1,4 @@
-class Course < Forgery
+class CanvasCourse < Forgery
   attr_reader :name, :uid, :sis_id, :description
   @@local_dictionaries = File.absolute_path("lib")
 
@@ -22,12 +22,12 @@ class Course < Forgery
   end
 
   def self.random
-    Course.new(
+    CanvasCourse.new(
       {
-        name: Course.course_name,
-        uid: Course.course_code,
+        name: CanvasCourse.course_name,
+        uid: CanvasCourse.course_code,
         sis: (12000+rand(1000000)).to_s,
-        desc: Course.description
+        desc: CanvasCourse.description
       }
     )
   end
@@ -54,7 +54,7 @@ class Course < Forgery
     courses = []
     if(opts[:rows])
       rows.times do |x|
-        courses.push(Course.random)
+        courses.push(CanvasCourse.random)
       end
     end
     header = ["name", "uid", "sis_id", "description"]

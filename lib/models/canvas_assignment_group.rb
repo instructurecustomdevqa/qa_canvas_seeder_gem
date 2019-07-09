@@ -1,4 +1,4 @@
-class AssignmentGroup < Forgery
+class CanvasAssignmentGroup < Forgery
 
   def to_s
     string = ""

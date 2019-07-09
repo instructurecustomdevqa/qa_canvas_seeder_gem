@@ -1,4 +1,4 @@
-class AssignmentGrade < Forgery
+class CanvasAssignmentGrade < Forgery
 
   def to_s
     string = ""
