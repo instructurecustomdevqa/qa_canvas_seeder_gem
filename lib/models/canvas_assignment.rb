@@ -15,7 +15,7 @@ class CanvasAssignment < Forgery
     @description = opts[:description] if opts[:description]
     @due_at = opts[:due_at] if opts[:due_at]
     @lock_at = opts[:lock_at] if opts[:lock_at]
-    @course_id = opts[:course_id] if opts[:course_id]
+    @course_uid = opts[:course_uid] if opts[:course_uid]
     @assignment_group = opts[:assignment_group] if opts[:assignment_group]
   end
 
