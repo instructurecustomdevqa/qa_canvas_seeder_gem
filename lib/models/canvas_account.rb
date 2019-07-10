@@ -6,8 +6,10 @@ class CanvasAccount < Forgery
   end
 
   def to_csv
-    row = [name, uid, parent_uid, root_uid, time_zone, sis_id, workflow]
+    #row = [name, uid, parent_uid, root_uid, time_zone, sis_id, workflow]
+    row = [uid, parent_uid, name, 'active', nil]
   end
+
 #future relase: Make fields reuired by canvas required here
   def initialize(opts = {})
     @name = opts[:name] if opts[:name]
@@ -35,18 +37,17 @@ class CanvasAccount < Forgery
   end
 
   def self.gen_file(opts = {})
-    parent, root = 1
-    rows = 0
-    parent = opts[:parent] if opts[:parent]
-    root = opts[:root] if opts[:root]
-    rows = opts[:rows] if opts[:rows]
+    opts[:rows] ? rows = opts[:rows] : rows = 0
+    opts[:parent] ? parent = opts[:parent] : parent = 1
+    opts[:root] ? root = opts[:root] : root = 1
     accounts = []
     if(opts[:rows])
       rows.times do |x|
         accounts.push(CanvasAccount.random(parent, root))
       end
     end
-    header = ["name", "uid", "parent_id", "root_id", "time_zone", "sis_id", "workflow"]
+    #header = ["name", "uid", "parent_id", "root_id", "time_zone", "sis_id", "workflow"]
+    header = ["account_id", "parent_account_id", "name", "status", "integration_id"]
     CSV.open("./accounts.csv", "wb", write_headers: true, headers: header) do |csv|
       accounts.each do |acc|
         csv << acc.to_csv

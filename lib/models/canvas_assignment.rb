@@ -1,6 +1,6 @@
 class CanvasAssignment < Forgery
   attr_reader :name, :description, :course_uid, :assignment_group
-  attr_accessor :due_at, :lock_at
+  attr_accessor :due_at, :lock_at, :host_info
 
   def to_s
     string = "#{name}, #{description}, #{due_at}, #{lock_at}, #{course_uid}, #{assignment_group}"
@@ -35,10 +35,9 @@ class CanvasAssignment < Forgery
 
   def self.gen_file(opts = {})
     course, group = 1
-    rows = 0
+    opts[:rows] ? rows = opts[:rows] : rows = 0
     course = opts[:course] if opts[:course]
     group = opts[:group] if opts[:group]
-    rows = opts[:rows] if opts[:rows]
     assignments = []
     if(opts[:rows])
       rows.times do |x|
