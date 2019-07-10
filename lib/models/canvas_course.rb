@@ -1,5 +1,5 @@
 class CanvasCourse < Forgery
-  attr_reader :name, :uid, :sis_id, :description
+  attr_reader :name, :uid, :sis_id, :description, :account_id, :term_id, :start_date, :end_date
   @@local_dictionaries = File.absolute_path("lib")
 
   def initialize(opts = {})
@@ -7,6 +7,10 @@ class CanvasCourse < Forgery
     @uid = opts[:uid] if opts[:uid]
     @sis_id = "#{opts[:sis]}" if opts[:sis]
     @description = opts[:desc] if opts[:desc]
+    @account_id = opts[:account] if opts[:account]
+    @term_id = opts[:term] if opts[:term]
+    @start_date = opts[:start] if opts[:start]
+    @end_date = opts[:end] if opts[:end]
   end
 
   def to_s
@@ -14,7 +18,8 @@ class CanvasCourse < Forgery
   end
 
   def to_csv
-    row = [name, uid, sis_id, description]
+    #row = [name, uid, sis_id, description]
+    row = [sis_id, uid, name, account_id, term_id, "active", nil, start_date, end_date, "online", nil]
   end
 
   def self.set_prefix prefix
@@ -49,15 +54,15 @@ class CanvasCourse < Forgery
   end
 
   def self.gen_file(opts = {})
-    rows = 0
-    rows = opts[:rows] if opts[:rows]
+    opts[:rows] ? rows = opts[:rows] : rows = 0
     courses = []
     if(opts[:rows])
       rows.times do |x|
         courses.push(CanvasCourse.random)
       end
     end
-    header = ["name", "uid", "sis_id", "description"]
+    #header = ["name", "uid", "sis_id", "description"]
+    header = ["course_id", "short_name", "long_name", "account_id", "term_id", "status", "integration_id", "start_date", "end_date", "course_format", "blueprint_course_id"]
     CSV.open("./courses.csv", "wb", write_headers: true, headers: header) do |csv|
       courses.each do |acc|
         csv << acc.to_csv
