@@ -69,7 +69,7 @@ class CanvasUser < Forgery
     request.content_type = "text/csv"
     request["Authorization"] = "Bearer #{opts[:token]}"
     request.body = ""
-    request.body << File.read("users.csv").delete("\r\n")
+    request.body << File.read("users.csv")
 
     req_options = {
       use_ssl: uri.scheme == "https",
