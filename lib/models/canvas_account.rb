@@ -1,4 +1,5 @@
 class CanvasAccount < Forgery
+
   attr_reader :name, :uid, :parent_uid, :root_uid, :time_zone, :sis_id, :workflow
 
   def to_s
@@ -6,7 +7,6 @@ class CanvasAccount < Forgery
   end
 
   def to_csv
-    #row = [name, uid, parent_uid, root_uid, time_zone, sis_id, workflow]
     row = [uid, parent_uid, name, 'active', nil]
   end
 
@@ -46,12 +46,13 @@ class CanvasAccount < Forgery
         accounts.push(CanvasAccount.random(parent, root))
       end
     end
-    #header = ["name", "uid", "parent_id", "root_id", "time_zone", "sis_id", "workflow"]
     header = ["account_id", "parent_account_id", "name", "status", "integration_id"]
     CSV.open("./accounts.csv", "wb", write_headers: true, headers: header) do |csv|
       accounts.each do |acc|
         csv << acc.to_csv
       end
     end
+    return accounts
   end
+
 end

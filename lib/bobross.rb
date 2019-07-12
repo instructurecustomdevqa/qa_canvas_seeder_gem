@@ -12,6 +12,8 @@ require "models/canvas_section"
 require "models/canvas_user"
 require "active_support/time"
 require "csv"
+require "net/http"
+require "uri"
 
 module Bobross
   class Error < StandardError; end

@@ -50,6 +50,7 @@ class CanvasAssignment < Forgery
         csv << acc.to_csv
       end
     end
+    return assignments
   end
 
 end

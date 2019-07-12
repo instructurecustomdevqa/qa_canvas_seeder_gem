@@ -7,7 +7,6 @@ class CanvasUser < Forgery
 
   def to_csv
     names = name.split(' ')
-    #row = [name, sis_id, login_id, email, time_zone]
     row = [sis_id, nil, login_id, nil, nil, nil, names.first, names.last, name, "#{names.last}, #{names.first}", "#{names.first[0].downcase}#{names.last.downcase}", email, "active"]
   end
 
@@ -49,12 +48,37 @@ class CanvasUser < Forgery
         users.push(CanvasUser.random(settings))
       end
     end
-    #header = ["name", "sis_id", "login_id", "email", "time_zone"]
     header = ["user_id", "integration_id", "login_id", "password", "ssha_password", "authentication_provider_id", "first_name", "last_name", "full_name", "sortable_name", "short_name", "email", "status"]
     CSV.open("./users.csv", "wb", write_headers: true, headers: header) do |csv|
       users.each do |acc|
         csv << acc.to_csv
       end
     end
+    return users
   end
+
+  def self.push_csv_to_canvas(opts={})
+    if(opts.nil? || opts[:host].nil? || opts[:token].nil?)
+      raise 'Please provide options hash with both :host and :token'
+    end
+    if(!File.file?("./users.csv"))
+      raise 'Please gen_file before trying to push to canvas'
+    end
+    uri = URI.parse("https://#{opts[:host]}/api/v1/accounts/1/sis_imports.json?import_type=instructure_csv")
+    request = Net::HTTP::Post.new(uri)
+    request.content_type = "text/csv"
+    request["Authorization"] = "Bearer #{opts[:token]}"
+    request.body = ""
+    request.body << File.read("users.csv").delete("\r\n")
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+    http.request(request)
+  end
+
+  end
+
 end
