@@ -1,5 +1,6 @@
 require "bobross/version"
 require "forgery"
+require "models/canvas_object"
 require "models/canvas_account"
 require "models/canvas_assignment_grade"
 require "models/canvas_assignment_group"

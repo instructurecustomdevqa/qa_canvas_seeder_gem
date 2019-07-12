@@ -1,4 +1,4 @@
-class CanvasAccount < Forgery
+class CanvasAccount < CanvasObject
 
   attr_reader :name, :uid, :parent_uid, :root_uid, :time_zone, :sis_id, :workflow
 

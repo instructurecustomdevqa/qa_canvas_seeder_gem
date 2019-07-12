@@ -1,4 +1,4 @@
-class CanvasCourse < Forgery
+class CanvasCourse < CanvasObject
   attr_reader :name, :uid, :sis_id, :description, :account_id, :term_id, :start_date, :end_date
   @@local_dictionaries = File.absolute_path("lib")
 
