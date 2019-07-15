@@ -1,5 +1,6 @@
 require "bobross/version"
 require "forgery"
+require "models/canvas_object"
 require "models/canvas_account"
 require "models/canvas_assignment_grade"
 require "models/canvas_assignment_group"
@@ -12,6 +13,8 @@ require "models/canvas_section"
 require "models/canvas_user"
 require "active_support/time"
 require "csv"
+require "net/http"
+require "uri"
 
 module Bobross
   class Error < StandardError; end

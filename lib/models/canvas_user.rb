@@ -1,4 +1,4 @@
-class CanvasUser < Forgery
+class CanvasUser < CanvasObject
   attr_reader :name, :sis_id, :login_id, :email, :time_zone
 
   def to_s
@@ -7,7 +7,6 @@ class CanvasUser < Forgery
 
   def to_csv
     names = name.split(' ')
-    #row = [name, sis_id, login_id, email, time_zone]
     row = [sis_id, nil, login_id, nil, nil, nil, names.first, names.last, name, "#{names.last}, #{names.first}", "#{names.first[0].downcase}#{names.last.downcase}", email, "active"]
   end
 
@@ -49,12 +48,13 @@ class CanvasUser < Forgery
         users.push(CanvasUser.random(settings))
       end
     end
-    #header = ["name", "sis_id", "login_id", "email", "time_zone"]
     header = ["user_id", "integration_id", "login_id", "password", "ssha_password", "authentication_provider_id", "first_name", "last_name", "full_name", "sortable_name", "short_name", "email", "status"]
     CSV.open("./users.csv", "wb", write_headers: true, headers: header) do |csv|
       users.each do |acc|
         csv << acc.to_csv
       end
     end
+    return users
   end
+
 end

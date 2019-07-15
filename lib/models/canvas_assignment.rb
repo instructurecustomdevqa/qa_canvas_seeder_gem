@@ -1,4 +1,4 @@
-class CanvasAssignment < Forgery
+class CanvasAssignment < CanvasObject
   attr_reader :name, :description, :course_uid, :assignment_group
   attr_accessor :due_at, :lock_at, :host_info
 
@@ -50,6 +50,7 @@ class CanvasAssignment < Forgery
         csv << acc.to_csv
       end
     end
+    return assignments
   end
 
 end

@@ -1,4 +1,4 @@
-class CanvasCourse < Forgery
+class CanvasCourse < CanvasObject
   attr_reader :name, :uid, :sis_id, :description, :account_id, :term_id, :start_date, :end_date
   @@local_dictionaries = File.absolute_path("lib")
 
@@ -18,7 +18,6 @@ class CanvasCourse < Forgery
   end
 
   def to_csv
-    #row = [name, uid, sis_id, description]
     row = [sis_id, uid, name, account_id, term_id, "active", nil, start_date, end_date, "online", nil]
   end
 
@@ -61,12 +60,13 @@ class CanvasCourse < Forgery
         courses.push(CanvasCourse.random)
       end
     end
-    #header = ["name", "uid", "sis_id", "description"]
     header = ["course_id", "short_name", "long_name", "account_id", "term_id", "status", "integration_id", "start_date", "end_date", "course_format", "blueprint_course_id"]
     CSV.open("./courses.csv", "wb", write_headers: true, headers: header) do |csv|
       courses.each do |acc|
         csv << acc.to_csv
       end
     end
+    return courses
   end
+
 end
