@@ -7,7 +7,7 @@ class CanvasObject < Forgery
     if(!File.file?(opts[:file]))
       raise 'Please gen_file before trying to push to canvas'
     end
-    uri = URI.parse("https://#{opts[:host]}/api/v1/accounts/1/sis_imports.json?import_type=instructure_csv")
+    uri = URI.parse("https://#{opts[:host]}/api/v1/accounts/self/sis_imports.json?import_type=instructure_csv")
     request = Net::HTTP::Post.new(uri)
     request.content_type = "text/csv"
     request["Authorization"] = "Bearer #{opts[:token]}"
