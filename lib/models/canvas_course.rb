@@ -1,6 +1,6 @@
 class CanvasCourse < CanvasObject
   attr_reader :name, :uid, :sis_id, :description, :account_id, :term_id, :start_date, :end_date
-  @@local_dictionaries = File.absolute_path('lib')
+  @@local_dictionaries = $LOAD_PATH.grep(/bobross.*lib/).first
 
   def initialize(opts = {})
     @name = opts[:name] if opts[:name]
