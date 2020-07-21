@@ -2,10 +2,10 @@ PATH
   remote: .
   specs:
     bobross (0.1.13)
-      bearcat
-      bundler
-      forgery
-      rake
+      bearcat (~> 1.4.1)
+      bundler (~> 2.1.4)
+      forgery (~> 0.7.0)
+      rake (~> 13.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -16,7 +16,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
-    bearcat (1.3.55)
+    bearcat (1.4.1)
       activesupport
       footrest (>= 0.2.2)
       paul_walker (~> 0.1.1)
@@ -61,7 +61,7 @@ PLATFORMS
 
 DEPENDENCIES
   bobross!
-  rspec
+  rspec (~> 3.9)
 
 BUNDLED WITH
    2.1.4

@@ -32,9 +32,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'bearcat'
-  spec.add_dependency 'bundler'
-  spec.add_dependency 'forgery'
-  spec.add_dependency 'rake'
-  spec.add_development_dependency 'rspec'
+  spec.add_dependency 'bearcat', '~> 1.4.1'
+  spec.add_dependency 'bundler', '~> 2.1.4'
+  spec.add_dependency 'forgery', '~> 0.7.0'
+  spec.add_dependency 'rake', '~> 13.0.1'
+  spec.add_development_dependency 'rspec', '~> 3.9'
 end
