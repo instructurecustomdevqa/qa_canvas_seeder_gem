@@ -1,7 +1,7 @@
 class CanvasGroupInAccount < Forgery
 
   def to_s
-    string = ""
+    string = ''
   end
 
   def self.random

@@ -9,13 +9,13 @@ class CanvasObject < Forgery
     end
     uri = URI.parse("https://#{opts[:host]}/api/v1/accounts/self/sis_imports.json?import_type=instructure_csv")
     request = Net::HTTP::Post.new(uri)
-    request.content_type = "text/csv"
-    request["Authorization"] = "Bearer #{opts[:token]}"
-    request.body = ""
+    request.content_type = 'text/csv'
+    request['Authorization'] = "Bearer #{opts[:token]}"
+    request.body = ''
     request.body << File.read(opts[:file])
 
     req_options = {
-      use_ssl: uri.scheme == "https",
+      use_ssl: uri.scheme == 'https',
     }
 
     response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|

@@ -1,6 +1,6 @@
 class CanvasCourse < CanvasObject
   attr_reader :name, :uid, :sis_id, :description, :account_id, :term_id, :start_date, :end_date
-  @@local_dictionaries = File.absolute_path("lib")
+  @@local_dictionaries = File.absolute_path('lib')
 
   def initialize(opts = {})
     @name = opts[:name] if opts[:name]
@@ -18,7 +18,7 @@ class CanvasCourse < CanvasObject
   end
 
   def to_csv
-    row = [sis_id, uid, name, account_id, term_id, "active", nil, start_date, end_date, "online", nil]
+    row = [sis_id, uid, name, account_id, term_id, 'active', nil, start_date, end_date, 'online', nil]
   end
 
   def self.set_prefix prefix
@@ -30,7 +30,7 @@ class CanvasCourse < CanvasObject
       {
         name: CanvasCourse.course_name,
         uid: CanvasCourse.course_code,
-        sis: (12000+rand(1000000)).to_s,
+        sis: (12_000+rand(1_000_000)).to_s,
         desc: CanvasCourse.description
       }
     )
@@ -60,8 +60,8 @@ class CanvasCourse < CanvasObject
         courses.push(CanvasCourse.random)
       end
     end
-    header = ["course_id", "short_name", "long_name", "account_id", "term_id", "status", "integration_id", "start_date", "end_date", "course_format", "blueprint_course_id"]
-    CSV.open("./courses.csv", "wb", write_headers: true, headers: header) do |csv|
+    header = %w[course_id short_name long_name account_id term_id status integration_id start_date end_date course_format blueprint_course_id]
+    CSV.open('./courses.csv', 'wb', write_headers: true, headers: header) do |csv|
       courses.each do |acc|
         csv << acc.to_csv
       end

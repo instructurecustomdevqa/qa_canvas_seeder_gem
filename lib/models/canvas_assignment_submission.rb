@@ -1,7 +1,7 @@
 class AssignmentSubmission < Forgery
   
   def to_s
-    string = ""
+    string = ''
   end
 
   def self.random

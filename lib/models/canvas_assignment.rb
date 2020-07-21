@@ -44,8 +44,8 @@ class CanvasAssignment < CanvasObject
         assignments.push(CanvasAssignment.random(course, group))
       end
     end
-    header = ["name", "description", "due_at", "lock_at", "course_id", "assignment_group"]
-    CSV.open("./assignments.csv", "wb", write_headers: true, headers: header) do |csv|
+    header = %w[name description due_at lock_at course_id assignment_group]
+    CSV.open('./assignments.csv', 'wb', write_headers: true, headers: header) do |csv|
       assignments.each do |acc|
         csv << acc.to_csv
       end

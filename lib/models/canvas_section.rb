@@ -3,7 +3,7 @@ class CanvasSection < CanvasObject
   attr_accessor :course_uid, :course_sis_id
 
   def to_csv
-    row = [sis_id, course_sis_id, name, "active", nil, start_date, end_date]
+    row = [sis_id, course_sis_id, name, 'active', nil, start_date, end_date]
   end
 
   def initialize(opts = {})
@@ -36,8 +36,8 @@ class CanvasSection < CanvasObject
       end
     end
 
-    header = ["section_id", "course_id", "name", "status", "integration_id", "start_date", "end_date"]
-    CSV.open("./sections.csv", "wb", write_headers: true, headers: header) do |csv|
+    header = %w[section_id course_id name status integration_id start_date end_date]
+    CSV.open('./sections.csv', 'wb', write_headers: true, headers: header) do |csv|
       sections.each do |acc|
         csv << acc.to_csv
       end

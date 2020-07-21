@@ -7,7 +7,7 @@ class CanvasUser < CanvasObject
 
   def to_csv
     names = name.split(' ')
-    row = [sis_id, nil, login_id, nil, nil, nil, names.first, names.last, name, "#{names.last}, #{names.first}", "#{names.first[0].downcase}#{names.last.downcase}", email, "active"]
+    row = [sis_id, nil, login_id, nil, nil, nil, names.first, names.last, name, "#{names.last}, #{names.first}", "#{names.first[0].downcase}#{names.last.downcase}", email, 'active']
   end
 
   def initialize (opts = {})
@@ -21,7 +21,7 @@ class CanvasUser < CanvasObject
   def self.random (opts = {})
     fn = Forgery('name').first_name
     ln = Forgery('name').last_name
-    domain = "instructure.com"
+    domain = 'instructure.com'
     if opts
       opts[:email_prefix] ? epre = "#{opts[:email_prefix]}+" : epre = ''
       opts[:sis_prefix] ? sispre = "#{opts[:sis_prefix]}_" : sispre = ''
@@ -31,7 +31,7 @@ class CanvasUser < CanvasObject
     CanvasUser.new(
       {
         name: "#{fn} #{ln}",
-        sis: "#{sispre}#{(3000+rand(1000000))}",
+        sis: "#{sispre}#{(3_000+rand(1_000_000))}",
         login: e,
         email: e,
         time_zone: Forgery('time').zone
@@ -48,8 +48,8 @@ class CanvasUser < CanvasObject
         users.push(CanvasUser.random(settings))
       end
     end
-    header = ["user_id", "integration_id", "login_id", "password", "ssha_password", "authentication_provider_id", "first_name", "last_name", "full_name", "sortable_name", "short_name", "email", "status"]
-    CSV.open("./users.csv", "wb", write_headers: true, headers: header) do |csv|
+    header = %w[user_id integration_id login_id password ssha_password authentication_provider_id first_name last_name full_name sortable_name short_name email status]
+    CSV.open('./users.csv', 'wb', write_headers: true, headers: header) do |csv|
       users.each do |acc|
         csv << acc.to_csv
       end

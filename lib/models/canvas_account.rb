@@ -10,7 +10,7 @@ class CanvasAccount < CanvasObject
     row = [uid, parent_uid, name, 'active', nil]
   end
 
-#future relase: Make fields reuired by canvas required here
+  # future relase: Make fields reuired by canvas required here
   def initialize(opts = {})
     @name = opts[:name] if opts[:name]
     @uid = opts[:uid] if opts[:uid]
@@ -26,11 +26,11 @@ class CanvasAccount < CanvasObject
     CanvasAccount.new(
       {
         name: a,
-        uid: "#{a}-#{rand(10000)}",
+        uid: "#{a}-#{rand(10_000)}",
         parent: parent_id,
         root: root_id,
         time_zone: Forgery('time').zone,
-        sis_id: (10000+rand(10000000)),
+        sis_id: (10_000+rand(10_000_000)),
         workflow: 'active'
         }
       )
@@ -46,8 +46,8 @@ class CanvasAccount < CanvasObject
         accounts.push(CanvasAccount.random(parent, root))
       end
     end
-    header = ["account_id", "parent_account_id", "name", "status", "integration_id"]
-    CSV.open("./accounts.csv", "wb", write_headers: true, headers: header) do |csv|
+    header = %w[account_id parent_account_id name status integration_id]
+    CSV.open('./accounts.csv', 'wb', write_headers: true, headers: header) do |csv|
       accounts.each do |acc|
         csv << acc.to_csv
       end
