@@ -23,7 +23,7 @@ class CanvasAssignment < CanvasObject
     d = Forgery('date').date
     CanvasAssignment.new(
       {
-        name: "What #{Forgery('name').job_title} #{Forgery('name').full_name} said about #{Forgery('name').industry}",
+        name: "What #{Forgery('name').title} #{Forgery('name').full_name} said about #{Forgery('name').industry}",
         description: "#{Forgery('lorem_ipsum').paragraphs}",
         due_at: d,
         lock_at: d+10.days,

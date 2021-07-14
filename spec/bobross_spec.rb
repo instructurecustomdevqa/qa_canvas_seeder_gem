@@ -24,7 +24,7 @@ RSpec.describe Bobross do
   it 'creates an assignment csv' do
     CanvasAssignment.gen_file({rows: 200})
     expect(File.exist? ('assignments.csv')).to eq(true)
-    File.delete('assignments.csv')
+    #File.delete('assignments.csv')
   end
 
   it 'creates a random course' do
