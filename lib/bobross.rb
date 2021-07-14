@@ -32,5 +32,6 @@ module Bobross
              |||
              |||
        , -=-~  .-^- _
-     HAPPY LITTLE TREES}
+     HAPPY LITTLE TREES
+   }
 end
