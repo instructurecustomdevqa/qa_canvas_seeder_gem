@@ -14,13 +14,13 @@ class CanvasSection < CanvasObject
     @end_date = opts[:end_at] if opts[:end_at]
   end
 
-  def self.random(course=1)
+  def self.random(opts={})
     d = Forgery('date').date
     CanvasSection.new(
       {
         name: "#{Forgery('address').country} #{Forgery('basic').color}",
         sis_id: (21000+rand(1000000)),
-        course: course,
+        course: opts[:course_id],
         start_date: d,
         end_date: d+90.days
       }
@@ -29,10 +29,14 @@ class CanvasSection < CanvasObject
 
   def self.gen_file(opts = {})
     opts[:rows] ? rows = opts[:rows] : rows = 0
+    if(opts[:use_courses])
+      opts[:sections_per_course] ? sections_per_course = opts[:sections_per_course] : sections_per_course = 1
+
+    end
     sections = []
     if(opts[:rows])
       rows.times do |x|
-        sections.push(CanvasSection.random)
+        sections.push(CanvasSection.random(opts))
       end
     end
 
