@@ -49,4 +49,25 @@ class CanvasSection < CanvasObject
     return sections
   end
 
+  def self.get_random_collection(qty=0, course)
+    sections = []
+    if (qty > 0)
+      qty.times do
+        sections.push(CanvasSection.random({course_id: course.sis_id}))
+      end
+    end
+    return sections
+  end
+
+  def self.write_collection_to_file(sections=[])
+    if(sections.count > 0)
+      header = %w[section_id course_id name status integration_id start_date end_date]
+      CSV.open('./sections.csv', 'wb', write_headers: true, headers: header) do |csv|
+        sections.each do |section|
+          csv << section.to_csv
+        end
+      end
+    end
+  end
+
 end

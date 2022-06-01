@@ -69,4 +69,25 @@ class CanvasCourse < CanvasObject
     return courses
   end
 
+  def self.get_random_collection(qty=0)
+    courses = []
+    if (qty > 0)
+      qty.times do
+        courses.push(CanvasCourse.random)
+      end
+    end
+    return courses
+  end
+
+  def self.write_collection_to_file(courses=[])
+    if(courses.count > 0)
+      header = %w[course_id short_name long_name account_id term_id status integration_id start_date end_date course_format blueprint_course_id]
+      CSV.open('./assignments.csv', 'wb', write_headers: true, headers: header) do |csv|
+        courses.each do |course|
+          csv << course.to_csv
+        end
+      end
+    end
+  end
+
 end

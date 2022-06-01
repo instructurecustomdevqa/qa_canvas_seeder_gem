@@ -1,44 +1,52 @@
 
 class CanvasTerm < CanvasObject
 
-  attr_reader :name, :uid, :sis_id, :term_start, :term_end, :student_acc_start, :student_acc_end, :teacher_acc_start, :teacher_acc_end, :ta_acc_start, :ta_acc_end, :designer_acc_start, :designer_acc_end
+  attr_reader :name, :integration_id, :term_id, :start_date, :end_date, :status
+  attr_writer :end_date
 
   def to_s
-    string = "#{uid}, #{name}, #{sis_id}, #{term_start}, #{term_end}, #{student_acc_start}, #{student_acc_end}, #{teacher_acc_start}, #{teacher_acc_end}, #{ta_acc_start}, #{ta_acc_end}, #{designer_acc_start}, #{designer_acc_end}"
+    string = "#{integration_id}, #{name}, #{term_id}, #{status}, #{start_date}, #{end_date}"
   end
 
   def to_csv
-    row = [uid, name, sis_id, term_start, term_end, student_acc_start, student_acc_end, teacher_acc_start, teacher_acc_end, ta_acc_start, ta_acc_end, designer_acc_start, designer_acc_end]
+    row = [integration_id, name, term_id, status, start_date, end_date]
   end
 
   # future relase: Make fields reuired by canvas required here
   def initialize(opts = {})
     @name = opts[:name] if opts[:name]
-    @uid = opts[:uid] if opts[:uid]
-    @sis_id = opts[:sis] if opts[:sis]
-    @term_start = opts[:term_start] if opts[:term_start]
-    @term_end = opt[:term_end] if opts[:term_end]
-    @student_acc_start = opt[:student_access_start] if opts[:student_access_start]
-    @student_acc_end = opt[:student_access_end] if opts[:student_access_end]
-    @teacher_acc_start = opt[:teacher_access_start] if opts[:teacher_access_start]
-    @teacher_acc_end = opt[:teacher_access_end] if opts[:teacher_access_end]
-    @ta_acc_start = opt[:ta_access_start] if opts[:ta_access_start]
-    @ta_acc_end = opt[:ta_access_end] if opts[:ta_access_end]
-    @designer_acc_start = opt[:designer_access_start] if opts[:designer_access_start]
-    @designer_acc_end = opt[:designer_access_end] if opts[:designer_access_end]
+    @integration_id = opts[:integration_id] if opts[:integration_id]
+    @term_id = opts[:term_id] if opts[:term_id]
+    @start_date = opts[:start_date] if opts[:start_date]
+    @end_date = opts[:end_date] if opts[:end_date]
+    @status = opts[:status] if opts[:status]
   end
 
   def self.random
-    a = Forgery('lorem_ipsum').words(6)
-    id_rand = rand(10_000)
-    CanvasTerm.new(
+    a = "#{Forgery('name').company_name} #{Forgery('name').industry}, #{Forgery('name').location}"
+    id_rand = rand(100_000)
+    days = rand(200)
+    rndTerm = CanvasTerm.new(
       {
         name: a,
-        uid: "#{a}-#{id_rand}",
-        sis_id: id_rand,
-        term_start: Forgery('date').date
+        integration_id: "#{a}-#{id_rand}",
+        term_id: "#{a}-#{id_rand}",
+        start_date: Forgery('date').date,
+        status: "active"
         }
       )
+    rndTerm.end_date = rndTerm.start_date + days.days if (days.even?)
+    return rndTerm
+  end
+
+  def self.get_random_collection(qty=0)
+    terms = []
+    if (qty > 0)
+      qty.times do
+        terms.push(CanvasTerm.random)
+      end
+    end
+    return terms
   end
 
   def self.gen_file(opts = {})
@@ -49,13 +57,24 @@ class CanvasTerm < CanvasObject
         terms.push(CanvasTerm.random)
       end
     end
-    header = %w[term_id name sis_id]
+    header = %w[integration_id name term_id status start_date end_date]
     CSV.open('./terms.csv', 'wb', write_headers: true, headers: header) do |csv|
       terms.each do |term|
         csv << term.to_csv
       end
     end
-    return accounts
+    return terms
+  end
+
+  def self.write_collection_to_file(terms=[])
+    if(terms.count > 0)
+      header = %w[integration_id name term_id status start_date end_date]
+      CSV.open('./terms.csv', 'wb', write_headers: true, headers: header) do |csv|
+        terms.each do |term|
+          csv << term.to_csv
+        end
+      end
+    end
   end
 
 end

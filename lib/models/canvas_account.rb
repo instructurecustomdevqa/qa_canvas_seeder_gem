@@ -55,4 +55,25 @@ class CanvasAccount < CanvasObject
     return accounts
   end
 
+  def self.get_random_collection(qty=0)
+    accounts = []
+    if (qty > 0)
+      qty.times do
+        accounts.push(CanvasAccount.random)
+      end
+    end
+    return accounts
+  end
+
+  def self.write_collection_to_file(accounts=[])
+    if(accounts.count > 0)
+      header = %w[account_id parent_account_id name status integration_id]
+      CSV.open('./accounts.csv', 'wb', write_headers: true, headers: header) do |csv|
+        accounts.each do |account|
+          csv << account.to_csv
+        end
+      end
+    end
+  end
+
 end
