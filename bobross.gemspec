@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'bobross'
   spec.version       = Bobross::VERSION
   spec.authors       = ['Jacob Slack', 'Trevor Byington']
-  spec.email         = ['jacobs@instructure.com', 'tbyington@instructure.com', 'tabyington@gmail.com']
+  spec.email         = ['tbyington@instructure.com', 'tabyington@gmail.com']
 
   spec.summary       = 'Generates data to put in your canvas instance.'
   spec.description   = 'Generates data to put in your canvas instance. Data can be exported as CSV for uploading or sent directly via api call'
@@ -32,9 +32,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'bearcat', '~> 1.4.4'
-  spec.add_dependency 'bundler', '~> 2.2.23'
+  spec.add_dependency 'bearcat', '~> 1.4.10'
+  spec.add_dependency 'bundler', '~> 2.3.14'
   spec.add_dependency 'forgery', '~> 0.8.1'
   spec.add_dependency 'rake', '~> 13.0.6'
-  spec.add_development_dependency 'rspec', '~> 3.10'
+  spec.add_development_dependency 'rspec', '~> 3.11.0'
 end
