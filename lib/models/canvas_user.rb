@@ -21,11 +21,11 @@ class CanvasUser < CanvasObject
   def self.random (opts = {})
     fn = Forgery('name').first_name
     ln = Forgery('name').last_name
-    domain = 'instructure.com'
+    domain = 'fake-instructure.com'
     if opts
       opts[:email_prefix] ? epre = "#{opts[:email_prefix]}+" : epre = ''
       opts[:sis_prefix] ? sispre = "#{opts[:sis_prefix]}_" : sispre = ''
-      opts[:domain] ? domain =  opts[:domain] : domain = 'instructure.com'
+      opts[:domain] ? domain =  opts[:domain] : domain = 'fake-instructure.com'
     end
     e = "#{epre}#{fn}.#{ln}@#{domain}"
     CanvasUser.new(
@@ -55,6 +55,27 @@ class CanvasUser < CanvasObject
       end
     end
     return users
+  end
+
+  def self.get_random_collection(qty=0)
+    users = []
+    if (qty > 0)
+      qty.times do
+        users.push(CanvasUser.random)
+      end
+    end
+    return users
+  end
+
+  def self.write_collection_to_file(users=[])
+    if(users.count > 0)
+      header = %w[user_id integration_id login_id password ssha_password authentication_provider_id first_name last_name full_name sortable_name short_name email status]
+      CSV.open('./users.csv', 'wb', write_headers: true, headers: header) do |csv|
+        users.each do |user|
+          csv << user.to_csv
+        end
+      end
+    end
   end
 
 end

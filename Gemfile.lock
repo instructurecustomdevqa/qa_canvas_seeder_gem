@@ -1,66 +1,65 @@
 PATH
   remote: .
   specs:
-    bobross (0.2.0)
-      bearcat (~> 1.4.4)
-      bundler (~> 2.2.23)
+    bobross (0.2.1)
+      bearcat (~> 1.4.10)
+      bundler (~> 2.3.14)
       forgery (~> 0.8.1)
       rake (~> 13.0.6)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.4)
+    activesupport (7.0.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
-    bearcat (1.4.4)
+    bearcat (1.4.10)
       activesupport
       footrest (>= 0.2.2)
       paul_walker (~> 0.1.1)
-    concurrent-ruby (1.1.9)
-    diff-lcs (1.4.4)
-    faraday (0.17.4)
+    concurrent-ruby (1.1.10)
+    diff-lcs (1.5.0)
+    faraday (0.17.5)
       multipart-post (>= 1.2, < 3)
     footrest (0.5.3)
       activesupport (>= 3.0.0)
       faraday (>= 0.9.0, < 1)
       link_header (>= 0.0.7)
     forgery (0.8.1)
-    i18n (1.8.10)
+    i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     link_header (0.0.8)
-    minitest (5.14.4)
+    minitest (5.15.0)
     multipart-post (2.1.1)
     paul_walker (0.1.2)
       redis (>= 4.0)
     rake (13.0.6)
-    redis (4.3.1)
-    rspec (3.10.0)
-      rspec-core (~> 3.10.0)
-      rspec-expectations (~> 3.10.0)
-      rspec-mocks (~> 3.10.0)
-    rspec-core (3.10.1)
-      rspec-support (~> 3.10.0)
-    rspec-expectations (3.10.1)
+    redis (4.6.0)
+    rspec (3.11.0)
+      rspec-core (~> 3.11.0)
+      rspec-expectations (~> 3.11.0)
+      rspec-mocks (~> 3.11.0)
+    rspec-core (3.11.0)
+      rspec-support (~> 3.11.0)
+    rspec-expectations (3.11.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-mocks (3.10.2)
+      rspec-support (~> 3.11.0)
+    rspec-mocks (3.11.1)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-support (3.10.2)
+      rspec-support (~> 3.11.0)
+    rspec-support (3.11.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    zeitwerk (2.4.2)
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-darwin-21
 
 DEPENDENCIES
   bobross!
-  rspec (~> 3.10)
+  rspec (~> 3.11.0)
 
 BUNDLED WITH
-   2.2.23
+   2.3.14
