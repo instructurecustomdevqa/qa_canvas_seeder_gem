@@ -23,58 +23,25 @@ class CanvasTerm < CanvasObject
   end
 
   def self.random
-    a = "#{Forgery('name').company_name} #{Forgery('name').industry}, #{Forgery('name').location}"
+    a = "#{Faker::Company.name} #{Faker::Company.industry}, #{Faker::Address.country}"
     id_rand = rand(100_000)
-    days = rand(200)
+    duration = rand(200)
     rndTerm = CanvasTerm.new(
       {
         name: a,
         integration_id: "#{a}-#{id_rand}",
         term_id: "#{a}-#{id_rand}",
-        start_date: Forgery('date').date,
+        start_date: Faker::Date.between(from: (Date.today - 7.days), to: (Date.today + 6.months)),
         status: "active"
         }
       )
-    rndTerm.end_date = rndTerm.start_date + days.days if (days.even?)
+    rndTerm.end_date = Faker::Date.between(from: rndTerm.start_date, to: (rndTerm.start_date + duration.days))
     return rndTerm
   end
 
-  def self.get_random_collection(qty=0)
-    terms = []
-    if (qty > 0)
-      qty.times do
-        terms.push(CanvasTerm.random)
-      end
-    end
-    return terms
-  end
-
-  def self.gen_file(opts = {})
-    opts[:rows] ? rows = opts[:rows] : rows = 0
-    terms = []
-    if(opts[:rows])
-      rows.times do |x|
-        terms.push(CanvasTerm.random)
-      end
-    end
+  def self.get_csv_headers
     header = %w[integration_id name term_id status start_date end_date]
-    CSV.open('./terms.csv', 'wb', write_headers: true, headers: header) do |csv|
-      terms.each do |term|
-        csv << term.to_csv
-      end
-    end
-    return terms
-  end
-
-  def self.write_collection_to_file(terms=[])
-    if(terms.count > 0)
-      header = %w[integration_id name term_id status start_date end_date]
-      CSV.open('./terms.csv', 'wb', write_headers: true, headers: header) do |csv|
-        terms.each do |term|
-          csv << term.to_csv
-        end
-      end
-    end
+    return header
   end
 
 end

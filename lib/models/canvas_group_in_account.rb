@@ -1,4 +1,4 @@
-class CanvasGroupInAccount < Forgery
+class CanvasGroupInAccount < CanvasObject
 
   def to_s
     string = ''

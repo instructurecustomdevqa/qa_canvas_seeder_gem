@@ -28,66 +28,17 @@ class CanvasCourse < CanvasObject
   def self.random
     CanvasCourse.new(
       {
-        name: CanvasCourse.course_name,
-        uid: CanvasCourse.course_code,
+        name: Faker::Educator.course_name,
+        uid: Faker::Educator.subject,
         sis: (12_000+rand(1_000_000)).to_s,
-        desc: CanvasCourse.description
+        desc: Faker::Lorem.paragraph
       }
     )
   end
-
-  def self.course_code
-    Forgery.load_from!(@@local_dictionaries)
-    dictionaries[:course_codes][@@row]
-  end
-
-  def self.course_name
-    Forgery.load_from!(@@local_dictionaries)
-    name_count = Forgery.dictionaries[:course_names].count
-    @@row = rand(name_count)
-    dictionaries[:course_names][@@row]
-  end
-
-  def self.description
-    Forgery(:lorem_ipsum).words(2+rand(30))
-  end
-
-  def self.gen_file(opts = {})
-    opts[:rows] ? rows = opts[:rows] : rows = 0
-    courses = []
-    if(opts[:rows])
-      rows.times do |x|
-        courses.push(CanvasCourse.random)
-      end
-    end
+  
+  def self.get_csv_headers
     header = %w[course_id short_name long_name account_id term_id status integration_id start_date end_date course_format blueprint_course_id]
-    CSV.open('./courses.csv', 'wb', write_headers: true, headers: header) do |csv|
-      courses.each do |acc|
-        csv << acc.to_csv
-      end
-    end
-    return courses
-  end
-
-  def self.get_random_collection(qty=0)
-    courses = []
-    if (qty > 0)
-      qty.times do
-        courses.push(CanvasCourse.random)
-      end
-    end
-    return courses
-  end
-
-  def self.write_collection_to_file(courses=[])
-    if(courses.count > 0)
-      header = %w[course_id short_name long_name account_id term_id status integration_id start_date end_date course_format blueprint_course_id]
-      CSV.open('./assignments.csv', 'wb', write_headers: true, headers: header) do |csv|
-        courses.each do |course|
-          csv << course.to_csv
-        end
-      end
-    end
+    return header
   end
 
 end

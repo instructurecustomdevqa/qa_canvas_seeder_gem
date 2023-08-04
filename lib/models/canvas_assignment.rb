@@ -20,11 +20,11 @@ class CanvasAssignment < CanvasObject
   end
 
   def self.random (course = 1, group = 1)
-    d = Forgery('date').date
+    d = Faker::Date.in_date_period
     CanvasAssignment.new(
       {
-        name: "What #{Forgery('name').title} #{Forgery('name').full_name} said about #{Forgery('name').industry}",
-        description: "#{Forgery('lorem_ipsum').paragraphs}",
+        name: "What #{Faker::Lorem.question}",
+        description: "#{Faker::Lorem.paragraph}",
         due_at: d,
         lock_at: d+10.days,
         course_uid: course,
@@ -33,45 +33,9 @@ class CanvasAssignment < CanvasObject
       )
   end
 
-  def self.gen_file(opts = {})
-    course, group = 1
-    opts[:rows] ? rows = opts[:rows] : rows = 0
-    course = opts[:course] if opts[:course]
-    group = opts[:group] if opts[:group]
-    assignments = []
-    if(opts[:rows])
-      rows.times do |x|
-        assignments.push(CanvasAssignment.random(course, group))
-      end
-    end
+  def self.get_csv_headers
     header = %w[name description due_at lock_at course_id assignment_group]
-    CSV.open('./assignments.csv', 'wb', write_headers: true, headers: header) do |csv|
-      assignments.each do |acc|
-        csv << acc.to_csv
-      end
-    end
-    return assignments
-  end
-
-  def self.get_random_collection(qty=0)
-    assignments = []
-    if (qty > 0)
-      qty.times do
-        assignments.push(CanvasAssignment.random)
-      end
-    end
-    return assignments
-  end
-
-  def self.write_collection_to_file(assignments=[])
-    if(assignments.count > 0)
-      header = %w[name description due_at lock_at course_id assignment_group]
-      CSV.open('./assignments.csv', 'wb', write_headers: true, headers: header) do |csv|
-        assignments.each do |assignment|
-          csv << assignment.to_csv
-        end
-      end
-    end
+    return header
   end
 
 end

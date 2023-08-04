@@ -15,10 +15,10 @@ class CanvasSection < CanvasObject
   end
 
   def self.random(opts={})
-    d = Forgery('date').date
+    d = Faker::Date.in_date_period
     CanvasSection.new(
       {
-        name: "#{Forgery('address').country} #{Forgery('basic').color}",
+        name: "#{Faker::Address.country} #{Faker::Color.color_name}",
         sis_id: (21000+rand(1000000)),
         course: opts[:course_id],
         start_date: d,
@@ -27,47 +27,9 @@ class CanvasSection < CanvasObject
     )
   end
 
-  def self.gen_file(opts = {})
-    opts[:rows] ? rows = opts[:rows] : rows = 0
-    if(opts[:use_courses])
-      opts[:sections_per_course] ? sections_per_course = opts[:sections_per_course] : sections_per_course = 1
-
-    end
-    sections = []
-    if(opts[:rows])
-      rows.times do |x|
-        sections.push(CanvasSection.random(opts))
-      end
-    end
-
+  def self.get_csv_headers
     header = %w[section_id course_id name status integration_id start_date end_date]
-    CSV.open('./sections.csv', 'wb', write_headers: true, headers: header) do |csv|
-      sections.each do |acc|
-        csv << acc.to_csv
-      end
-    end
-    return sections
-  end
-
-  def self.get_random_collection(qty=0, course)
-    sections = []
-    if (qty > 0)
-      qty.times do
-        sections.push(CanvasSection.random({course_id: course.sis_id}))
-      end
-    end
-    return sections
-  end
-
-  def self.write_collection_to_file(sections=[])
-    if(sections.count > 0)
-      header = %w[section_id course_id name status integration_id start_date end_date]
-      CSV.open('./sections.csv', 'wb', write_headers: true, headers: header) do |csv|
-        sections.each do |section|
-          csv << section.to_csv
-        end
-      end
-    end
+    return header
   end
 
 end

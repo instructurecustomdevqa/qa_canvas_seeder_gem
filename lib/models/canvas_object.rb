@@ -1,4 +1,4 @@
-class CanvasObject < Forgery
+class CanvasObject < Object
 
   def self.https_push_csv_to_canvas(opts={})
     if(opts.nil? || opts[:host].nil? || opts[:token].nil?)
