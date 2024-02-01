@@ -5,7 +5,7 @@ class CanvasObject < Object
       raise 'Please provide options hash with both :host and :token'
     end
     if(!File.file?(opts[:file]))
-      raise 'Please gen_file or write_collection_to_file before trying to push to canvas'
+      raise 'Please provide a file to use before trying to push to canvas'
     end
 
     opts[:host] = "https://#{opts[:host]}"
@@ -17,7 +17,7 @@ class CanvasObject < Object
       raise 'Please provide options hash with both :host and :token'
     end
     if(!File.file?(opts[:file]))
-      raise 'Please gen_file or write_collection_to_file before trying to push to canvas'
+      raise 'Please provide a file to use before trying to push to canvas'
     end
 
     opts[:host] = "http://#{opts[:host]}"
