@@ -10,30 +10,14 @@ class CanvasAccount < CanvasObject
     row = [uid, parent_uid, name, 'active', nil]
   end
 
-  # future relase: Make fields reuired by canvas required here
   def initialize(opts = {})
-    @name = opts[:name] if opts[:name]
-    @uid = opts[:uid] if opts[:uid]
-    @parent_id = opts[:parent] if opts[:parent]
-    @root_id = opts[:root] if opts[:root]
-    @time_zone = opts[:time_zone] if opts[:time_zone]
-    @sis_id = opts[:sis] if opts[:sis]
-    @workflow = opts[:workflow] if opts[:workflow]
-  end
-
-  def self.random (parent_id = 1 , root_id = 1)
-    a = Faker::Company.name
-    CanvasAccount.new(
-      {
-        name: a,
-        uid: "#{a}-#{rand(10_000)}",
-        parent: parent_id,
-        root: root_id,
-        time_zone: Faker::Address.time_zone,
-        sis_id: (10_000+rand(10_000_000)),
-        workflow: 'active'
-        }
-      )
+    @name = opts[:name] ? opts[:name] : Faker::Company.name
+    @uid = opts[:uid] ? opts[:uid] : "#{@name}-#{rand(10_000)}" 
+    @parent_id = opts[:parent_id] ? opts[:parent_id] : 1 
+    @root_id = opts[:root_account] ? opts[:root_account] : 1 
+    @time_zone = opts[:time_zone] ? opts[:time_zone] : Faker::Address.time_zone 
+    @sis_id = opts[:sis_id] ? opts[:sis_id] : (10_000+rand(10_000_000)) 
+    @workflow = opts[:workflow_status] ? opts[:workflow_status] : 'active' 
   end
 
   def self.get_csv_headers
